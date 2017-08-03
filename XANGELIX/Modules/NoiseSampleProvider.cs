@@ -13,6 +13,7 @@ namespace XANGELIX.Modules {
 			random = new Random();
 		}
 
+		// TODO implement reset with circle buffer
 		public override int Read(float[] buffer, int offset, int count, uint frame) {
 			for (int i = 0; i < count; i++) {
 				buffer[i + offset] = 2f * (float)random.NextDouble() - 1f;

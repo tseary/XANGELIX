@@ -15,7 +15,7 @@ namespace XANGELIX.Modules {
 
 		public EchoSampleProvider() {
 			inputBuffer = new float[0];
-			echoCircleBuffer = new CircleBuffer(SampleRate);
+			echoCircleBuffer = new CircleBuffer((uint)SampleRate);
 
 			InputSampleProvider = new DCSampleProvider();
 

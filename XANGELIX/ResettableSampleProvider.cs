@@ -3,6 +3,7 @@ using NAudio.Wave;
 
 namespace XANGELIX {
 	// TODO Make OutputSampleProvider class that calls Read and counts frames
+	// TODO Extrapolate from saved data if frame differs by > 1
 	abstract class ResettableSampleProvider : ISampleProvider {
 
 		protected uint lastFrame = 0;
@@ -34,15 +35,20 @@ namespace XANGELIX {
 		/// samples as the previous call.
 		/// Allows a sample provider to connect to multiple inputs.
 		/// </summary>
+		/// <param name="buffer">The buffer to fill with samples.</param>
+		/// <param name="offset">Offset into buffer.</param>
+		/// <param name="count">The number of samples to read.</param>
+		/// <param name="frame">The set of samples to read.</param>
+		/// <returns>The number of samples written to the buffer.</returns>
 		public abstract int Read(float[] buffer, int offset, int count, uint frame);
 
 		/// <summary>
 		/// Increments the frame number and calls Read(float[], int, int, uint)
 		/// </summary>
-		/// <param name="buffer"></param>
-		/// <param name="offset"></param>
-		/// <param name="count"></param>
-		/// <returns></returns>
+		/// <param name="buffer">The buffer to fill with samples.</param>
+		/// <param name="offset">Offset into buffer.</param>
+		/// <param name="count">The number of samples to read.</param>
+		/// <returns>The number of samples written to the buffer.</returns>
 		public int Read(float[] buffer, int offset, int count) {
 			return Read(buffer, offset, count, lastFrame + 1);
 		}

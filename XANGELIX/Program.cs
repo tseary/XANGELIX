@@ -25,16 +25,16 @@ namespace XANGELIX {
 
 			//var noiseSource = new NoiseSampleProvider();
 
-			//var filter = new FilterSampleProvider();
-			//filter.InputSampleProvider = baseOscillator;
+			var filter = new FilterSampleProvider(400);
+			filter.InputSampleProvider = baseOscillator;
 
 			var echo = new EchoSampleProvider();
 			echo.InputSampleProvider = baseOscillator;
 
 			var mixer = new MixerSampleProvider();
-			mixer.AddInput(baseOscillator, 0f);
-			mixer.AddInput(echo, 1f);
-			//mixer.AddInput(filter, 0f);
+			//mixer.AddInput(baseOscillator, 0f);
+			mixer.AddInput(echo, 0f);
+			mixer.AddInput(filter, 1f);
 
 			// Create audio player
 			var waveOutEvent = new WaveOutEvent();
